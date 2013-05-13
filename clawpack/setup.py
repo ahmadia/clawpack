@@ -1,3 +1,11 @@
+import os
+from os.path import join as pjoin, dirname
+import sys
+
+if sys.version_info[0] < 3:
+    import __builtin__ as builtins
+else:
+    import builtins
 
 def configuration(parent_package='',top_path=None):
     from numpy.distutils.misc_util import Configuration
@@ -7,6 +15,9 @@ def configuration(parent_package='',top_path=None):
     config.add_subpackage('visclaw')
     config.add_subpackage('pyclaw')
     config.add_subpackage('petclaw')
+
+    if builtins.__USE_CUDACLAW__ and builtins.__CYTHON_BUILD__:
+        config.add_subpackage('cudaclaw')
     return config
 
 if __name__ == '__main__':
