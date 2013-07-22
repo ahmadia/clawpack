@@ -221,6 +221,9 @@ def setup_package():
             if not os.path.exists('clawpack/cudaclaw') and builtins.__USE_CUDACLAW__:
                 os.symlink(os.path.abspath('pyclaw/src/cudaclaw'),
                            'clawpack/cudaclaw')
+            if not os.path.exists('clawpack/cudapetclaw') and builtins.__USE_CUDACLAW__:
+                os.symlink(os.path.abspath('pyclaw/src/cudapetclaw'),
+                           'clawpack/cudapetclaw')
 
 # build pyclaw/clawpack (numpy buildsystem)
             from numpy.distutils.core import setup
@@ -335,8 +338,7 @@ def customize_cython_for_nvcc(self):
             if not os.path.exists(v):
                 raise EnvironmentError('The CUDA %s path could not be located in %s' % (k, v))
 
-        cudaconfig['cuflags'] = '-m64 -gencode arch=compute_10,code=sm_10' + \
-                                ' -gencode arch=compute_20,code=sm_20' + \
+        cudaconfig['cuflags'] = '-m64 ' + \
                                 ' -gencode arch=compute_30,code=sm_30' + \
                                 ' -gencode arch=compute_35,code=sm_35'
 

@@ -18,6 +18,7 @@ def configuration(parent_package='',top_path=None):
 
     if builtins.__USE_CUDACLAW__ and builtins.__CYTHON_BUILD__:
         config.add_subpackage('cudaclaw')
+        config.add_subpackage('cudapetclaw')
     return config
 
 if __name__ == '__main__':
